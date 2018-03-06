@@ -1,0 +1,23 @@
+<div class="dashboard">
+  <div class="container" ng-controller='dashboardController'>
+      <form class='input-form' name="todoform">
+        <div class="row">
+          <div class="col-xs-12 col-md-3">
+            <div class="input">
+              <h4>Task :</h4>
+              <input type="text" id="todo" class="form-control"  ng-model="newTask" name ="newTask" >
+              <h4>Description :</h4>
+              <input type="text" id="todoDes" class="form-control" name ="desTask" ng-model="desTask" placeholder="Description" >
+              <h4>Date :</h4>
+              <input datetime-picker  id="todoDate" class="form-control" name ="dateTask" ng-model="dateTask"  >
+              <input type="hidden" id="todo" class="form-control"  ng-model="hashkey" name ="newTask" >
+              <div id="buttn">
+                <button class="btn btn-outline-primary btn-block"  ng-click='update()' >Update</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      
+  </div>
+</div>
