@@ -4,8 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 /*import { RouterModule } from '@angular/router'; */
 import { RouterModule, Routes } from '@angular/router';
+import { StorageServiceModule } from 'angular-webstorage-service'; // for local storage , import the module
 
-
+import { RegisterService } from './register.service';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -13,36 +14,30 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 
+
 const appRoutes: Routes = [
-  { path: '', component: LoginComponent },
-  {path: 'register', component: RegisterComponent },
-  { path: '**', component: LoginComponent }
- 
-  /*{ path: 'heroes', component: HeroListComponent, data: { title: 'Heroes List' } },*/
+{ path: '', component: LoginComponent },
+{path: 'register', component: RegisterComponent ,data: { title: 'register' } },
+{ path: '**', component: LoginComponent }
 ];
-
-
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    DashboardComponent
+  AppComponent,
+  LoginComponent,
+  RegisterComponent,
+  DashboardComponent
   ],
   imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    RouterModule.forRoot(appRoutes)
+  BrowserModule,
+  FormsModule,
+  HttpModule,
+  RouterModule.forRoot(appRoutes),
+  StorageServiceModule
   ],
-  providers: [],
+  providers: [
+  RegisterService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-
-/*
-    {path: '/', component: LoginComponent },
-      {path: 'register', component: RegisterComponent },
-      {path: 'dashboard', component: DashboardComponent }*/
