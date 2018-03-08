@@ -11,8 +11,6 @@ export class RegisterService {
 
   constructor(private router: Router) { 
 
-    console.log("for login function checking , coming to service or not");
-
    let reg = this.getRegister();
     if (reg.length == 0) {
       this.nextId = 0;
@@ -24,6 +22,10 @@ export class RegisterService {
 
 
 public addRegister(name: string , email:string , password: string): void {
+
+
+
+
     let register = new Register(this.nextId, name ,email , password);
     let reg = this.getRegister();
     reg.push(register);
@@ -58,15 +60,17 @@ public addRegister(name: string , email:string , password: string): void {
 
          for (var i = reg.length - 1; i >= 0; i--) {
 
-           if((reg[i].email) == email && (reg[i].password == password))
+           if((reg[i].email) == email && (reg[i].password) == password)
            {
              console.log("in login function lop");
-           alert(reg[i].email);
-         alert(reg[i].password);
+         alert("login sucessful");
            this.router.navigate(['/dashboard']);
 
 
-
+         }
+         else
+         {
+           alert("invalid credits")
          }
 
   }
