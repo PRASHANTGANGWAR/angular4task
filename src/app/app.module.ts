@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { TodoItemComponent } from './todo-item/todo-item.component';
 
 
 
@@ -18,6 +19,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 const appRoutes: Routes = [
 { path: '', component: LoginComponent },
 {path: 'register', component: RegisterComponent ,data: { title: 'register' } },
+{ path: 'dashboard', component: DashboardComponent },
 { path: '**', component: LoginComponent }
 ];
 
@@ -26,7 +28,8 @@ const appRoutes: Routes = [
   AppComponent,
   LoginComponent,
   RegisterComponent,
-  DashboardComponent
+  DashboardComponent,
+  TodoItemComponent
   ],
   imports: [
   BrowserModule,

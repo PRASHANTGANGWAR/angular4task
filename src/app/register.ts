@@ -1,9 +1,13 @@
 export class Register {
 	id: number;
-	text: string;
+	name: string;
+	email: string;
+	password: string;
 
-	constructor(id: number, text: string) {
+	constructor(id: number, name: string , email:string , password:string) {
 		this.id = id;
-		this.text = text;
+		this.name = name;
+		this.email = email;
+		this.password = password;
 	}
 }

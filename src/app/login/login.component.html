@@ -17,21 +17,22 @@
 					<br>
 					<br>
 					<div >
-						<form style="background-color: #ffffff" name="loginForm" ng-submit="login(user,loginForm)" >
+						<form style="background-color: #ffffff" name="loginForm"  >
 							<div class="form-group ">
 								<label ></label>
-								<input type="text" class="form-control" placeholder="Enter email" name="email" ng-model="user.email" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+								<input type="text" class="form-control" placeholder="Enter email" name="email"  id="exampleInputEmail1" required [(ngModel)]="email" value={{email}} >
 							</div>
 							<div class="form-group ">
 								<label></label>
-								<input type="text" class="form-control" placeholder="Enter password" ng-model="user.password_var" id="exampleInputPassword1" required>
+								<input type="text" class="form-control" placeholder="Enter password" name="password"
+								[(ngModel)]="password" value={{password}} id="exampleInputPassword1" required>
 							</div>
 
 							<div class= "mError" ng-messages="loginForm.email.$error" >
 								<span ng-message="validationError">password and email are incorrect</span>
 							</div>
 
-							<button type="submit" href ="" class="bt"  >Sign In</button>
+							<button type="submit"  class="bt" (click)="logincheck()"  >Sign In</button>
 						</form>
 					</div>
 				</div>

@@ -8,10 +8,16 @@ import { RegisterService } from '../register.service';
 })
 export class RegisterComponent implements OnInit {
 
-  public regText: string;
+  public name: string;
+  public email: string;
+  public password: string;
+
+
 
   constructor(private registerService: RegisterService) {
-    this.regText = '';
+    this.name = '';
+    this.email = '';
+    this.password='';
   }
 
   ngOnInit() {
@@ -19,10 +25,11 @@ export class RegisterComponent implements OnInit {
 
 	private addRegister(): void {
 		console.log("A");
-		console.log(this.regText);
-
-    this.registerService.addRegister(this.regText);
-    this.regText = '';
+    this.registerService.addRegister(this.name , this.email , this.password);
+    this.name = '';
+    this.email = '';
+    this.password ='';
+    
 
 }
 }

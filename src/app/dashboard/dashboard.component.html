@@ -1,3 +1,130 @@
-<p>
-  dashboard works!
-</p>
+
+
+<div> 
+  <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <p class="navbar-brand" id="welcome">Welcome : {{username}}</p>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li id="logout"><a href="" routerLink='/'> Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+	<div class="dashboard">
+		<div class="" id="dash" >
+		    <form class='input-form' name="todoform" >
+		      <div class="row ">
+		      <div class="col-xs-3 col-md-3"></div>
+		        <div class="col-xs-6 col-md-6">
+
+		          <div class="input">
+		            
+		            <h5>Task Name :</h5>
+		            <input type="text" id="todo" class="form-control" name ="todo" 
+		            [(ngModel)]="todo" value={{todo}} placeholder="Add task" required>
+
+		            <h5>Description :</h5>
+		            <input type="text" id="todoDes" class="form-control" name ="description"
+		             [(ngModel)]="description" value={{description}}  placeholder="Description" required>
+		            
+		            <h5>Date :</h5>
+		            <input datetime-picker id="todoDate" class="form-control" name ="date" 
+		            [(ngModel)]="date" value={{date}} required>
+		  			
+
+		  			  <div  id="buttn">
+						  <button class="btn btn-outline-primary btn-block" type="submit" (click)="addRegister()"  >ADD TODO</button>
+						   <button class="btn btn-outline-primary btn-block" >EDIT TODO</button>
+					  </div>
+
+				</div>
+			</div>
+		</div>
+	</form>
+		            
+								<!-- adding to do -->
+
+
+
+<!-- ======================================================================================= -->
+<!-- 
+				
+		              <div id="search" class="input ">
+					      <input type="text" class="form-control" placeholder="Search " name ="search" >
+					      <span class="input-group-btn">
+					        
+					      </span>
+					  </div>
+		          </div>
+		        </div>
+		        <div class="col-xs-3 col-md-3"></div>
+		      </div>
+		    <div class="table-responsive col-xs-12 col-md-12">          
+			  <table class="table">
+			    <thead>
+			      <tr>  
+			        <th>Task 
+				        <a ng-click='sorting()'>
+		          			<span class="glyphicon glyphicon-chevron-up"></span>
+		        		</a>
+		        		<a ng-click='revSorting()'>
+		          			<span class="glyphicon glyphicon-chevron-down"></span>
+		        		</a>
+		        	</th>
+			        <th>Description</th>
+			        <th>Date</th>
+			        <th>Added</th>		        
+			        <th>Edit</th>
+			        <th>Delete</th>
+			      </tr>
+			    </thead>
+			    <tbody ng-repeat="task in userTask | filter: search">
+			      <tr>
+			        <td>
+			          <div >
+			            <span ng-class='{done: task.done}'></span>
+			          </div>
+			        </td>
+			        <td>
+			          <div >
+			            <span ng-class='{done: task.done}'></span>
+			          </div>
+			        </td>
+			        <td>
+			          <div >
+			            <span ng-class='{done: task.done}'></span>
+			          </div>
+			        </td>
+			        <td>
+			          <div >
+			            <span am-time-ago="task.taskTime.time"></span>
+			          </div>
+			        </td>
+			        <td>
+			          <div >
+			          <span class="pull-center">
+			              <button class="btn btn-default btn-xs" ng-click="edit(task)">
+			                <span class="glyphicon glyphicon-pencil" ></span>
+			              </button>
+			          </span>
+			          </div>
+			        </td>
+			        <td>
+			          <div >
+			          <span class="pull-center">
+			            <button class="btn btn-danger btn-xs" ng-click="remove(task.$$hashKey)" >
+			              <span class="glyphicon glyphicon-remove" >
+			              </span>
+			            </button>
+			          </span>
+			          </div>
+			        </td>
+			      </tr>
+			    </tbody>
+			  </table>
+		  	</div>
+		  </form>
+	 -->	</div>
+	</div>
+</div>

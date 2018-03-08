@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Register } from '../app/register';
+import { Login } from '../app/login';
+import { Router } from "@angular/router";
 
 
 
@@ -7,7 +9,9 @@ import { Register } from '../app/register';
 export class RegisterService {
  private nextId: number;
 
-  constructor() { 
+  constructor(private router: Router) { 
+
+    console.log("for login function checking , coming to service or not");
 
    let reg = this.getRegister();
     if (reg.length == 0) {
@@ -19,14 +23,16 @@ export class RegisterService {
 }
 
 
-public addRegister(text: string): void {
-    let register = new Register(this.nextId, text);
+public addRegister(name: string , email:string , password: string): void {
+    let register = new Register(this.nextId, name ,email , password);
     let reg = this.getRegister();
     reg.push(register);
 
     // save the todos to local storage
     this.setLocalStorageTodos(reg);
     this.nextId++;
+    this.router.navigate(['/']);
+
   }
 
   public getRegister(): Register[] {
@@ -46,4 +52,26 @@ public addRegister(text: string): void {
   }
 
  
+  public logincheck(email: string , password: string)
+  {
+          let reg = this.getRegister();
+
+         for (var i = reg.length - 1; i >= 0; i--) {
+
+           if((reg[i].email) == email && (reg[i].password == password))
+           {
+             console.log("in login function lop");
+           alert(reg[i].email);
+         alert(reg[i].password);
+           this.router.navigate(['/dashboard']);
+
+
+
+         }
+
+  }
+
+  }
+
+
 }
