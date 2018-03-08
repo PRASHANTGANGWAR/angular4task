@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Input } from '@angular/core';
+import { DashboardService } from '../dashboard.service';
+import { Dashboard } from '../dashboard';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +9,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+	  public taskname: string;
+  public description: string;
+  public date: string;
+   @Input()
+
+  public todo: Dashboard;
+
+
+  constructor(private dashboardService: DashboardService) { 
+
+  	this.taskname = '';
+
+  	this.description = '';
+  	this.date = '';
+  }
 
   ngOnInit() {
+  }
+
+  private addTodo(): void {
+		console.log("b");
+    this.dashboardService.addTodo(this.taskname , this.description , this.date);
+    
+  	this.taskname = '';
+
+  	this.description = '';
+  	this.date = '';
+
+}
+
+
+
+  private removeTodo(): void {
+    this.dashboardService.removeTodo(this.todo.id);
   }
 
 }

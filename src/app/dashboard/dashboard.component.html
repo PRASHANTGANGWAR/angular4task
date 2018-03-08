@@ -21,35 +21,26 @@
 		          <div class="input">
 		            
 		            <h5>Task Name :</h5>
-		            <input type="text" id="todo" class="form-control" name ="todo" 
-		            [(ngModel)]="todo" value={{todo}} placeholder="Add task" required>
+		            <input type="text" id="todo" class="form-control" name ="taskname" 
+		            [(ngModel)]="taskname" value={{taskname}} placeholder="Add task" required >
 
 		            <h5>Description :</h5>
 		            <input type="text" id="todoDes" class="form-control" name ="description"
-		             [(ngModel)]="description" value={{description}}  placeholder="Description" required>
+		             [(ngModel)]="description" value={{description}}  placeholder="Description"  >
 		            
 		            <h5>Date :</h5>
-		            <input datetime-picker id="todoDate" class="form-control" name ="date" 
-		            [(ngModel)]="date" value={{date}} required>
+		            <input type="date" class="form-control" name ="date" 
+		            [(ngModel)]="date" value={{date}} required >
 		  			
 
 		  			  <div  id="buttn">
-						  <button class="btn btn-outline-primary btn-block" type="submit" (click)="addRegister()"  >ADD TODO</button>
-						   <button class="btn btn-outline-primary btn-block" >EDIT TODO</button>
-					  </div>
+						  <button class="btn btn-outline-primary btn-block" type="submit" (click)="addTodo()"  >ADD TODO</button>
+						   <!-- <button class="btn btn-outline-primary btn-block" >EDIT TODO</button> -->
+					  </div>      
 
-				</div>
-			</div>
-		</div>
-	</form>
-		            
+					  <hr>     
 								<!-- adding to do -->
-
-
-
-<!-- ======================================================================================= -->
-<!-- 
-				
+<!-- ======================================================================================= -->			
 		              <div id="search" class="input ">
 					      <input type="text" class="form-control" placeholder="Search " name ="search" >
 					      <span class="input-group-btn">
@@ -60,7 +51,8 @@
 		        </div>
 		        <div class="col-xs-3 col-md-3"></div>
 		      </div>
-		    <div class="table-responsive col-xs-12 col-md-12">          
+		    <div class="table-responsive col-xs-12 col-md-12">      
+
 			  <table class="table">
 			    <thead>
 			      <tr>  
@@ -74,37 +66,33 @@
 		        	</th>
 			        <th>Description</th>
 			        <th>Date</th>
-			        <th>Added</th>		        
+			      		        
 			        <th>Edit</th>
 			        <th>Delete</th>
 			      </tr>
 			    </thead>
-			    <tbody ng-repeat="task in userTask | filter: search">
+			    <tbody *ngFor="let todo of dashboardService.getTodos()">
 			      <tr>
 			        <td>
 			          <div >
-			            <span ng-class='{done: task.done}'></span>
+			            <span >{{todo.taskname}}</span>
 			          </div>
 			        </td>
 			        <td>
 			          <div >
-			            <span ng-class='{done: task.done}'></span>
+			            <span >{{todo.description}}</span>
 			          </div>
 			        </td>
 			        <td>
 			          <div >
-			            <span ng-class='{done: task.done}'></span>
+			            <span >{{todo.date}}</span>
 			          </div>
 			        </td>
-			        <td>
-			          <div >
-			            <span am-time-ago="task.taskTime.time"></span>
-			          </div>
-			        </td>
+			        
 			        <td>
 			          <div >
 			          <span class="pull-center">
-			              <button class="btn btn-default btn-xs" ng-click="edit(task)">
+			              <button class="btn btn-default btn-xs" >
 			                <span class="glyphicon glyphicon-pencil" ></span>
 			              </button>
 			          </span>
@@ -113,7 +101,7 @@
 			        <td>
 			          <div >
 			          <span class="pull-center">
-			            <button class="btn btn-danger btn-xs" ng-click="remove(task.$$hashKey)" >
+			            <button class="btn btn-danger btn-xs" >
 			              <span class="glyphicon glyphicon-remove" >
 			              </span>
 			            </button>
@@ -122,9 +110,9 @@
 			        </td>
 			      </tr>
 			    </tbody>
-			  </table>
+			  </table> 
 		  	</div>
 		  </form>
-	 -->	</div>
+	 </div>
 	</div>
 </div>

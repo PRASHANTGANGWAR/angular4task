@@ -40,11 +40,11 @@ public addRegister(name: string , email:string , password: string): void {
     return localStorageItem == null ? [] : localStorageItem.reg;
   }
 
-  public removeTodo(id: number): void {
+  /*public removeTodo(id: number): void {
     let reg = this.getRegister();
     reg = reg.filter((register)=> register.id != id);
     this.setLocalStorageTodos(reg);
-  }
+  }*/
 
   // private function to help save to local storage
   private setLocalStorageTodos(reg: Register[]): void {

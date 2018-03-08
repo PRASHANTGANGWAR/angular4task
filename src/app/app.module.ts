@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { StorageServiceModule } from 'angular-webstorage-service'; // for local storage , import the module
 
 import { RegisterService } from './register.service';
+import { DashboardService } from './dashboard.service';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -39,7 +40,9 @@ const appRoutes: Routes = [
   StorageServiceModule
   ],
   providers: [
-  RegisterService
+  RegisterService,
+  DashboardService
+
   ],
   bootstrap: [AppComponent]
 })
