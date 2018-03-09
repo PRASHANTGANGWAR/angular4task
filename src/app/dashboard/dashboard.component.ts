@@ -41,8 +41,17 @@ export class DashboardComponent implements OnInit {
 
 
 
-  private removeTodo(): void {
-    this.dashboardService.removeTodo(this.todo.id);
+  private removeTodo(id: number): void {
+    alert(id);
+    this.dashboardService.removeTodo(id);
   }
 
+ key: string = 'taskname'; //set default
+  reverse: boolean = false;
+  sort(key){
+    this.key = key;
+    this.reverse = !this.reverse;
+
+
+}
 }

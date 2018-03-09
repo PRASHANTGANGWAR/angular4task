@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RegisterService } from '../register.service';
-
+declare var jquery:any;
+declare var $ :any;
 
 @Component({
   selector: 'app-login',
@@ -28,5 +29,8 @@ export class LoginComponent implements OnInit {
     this.password ='';
 
 }
+
+
+
 }
 

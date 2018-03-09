@@ -8,7 +8,7 @@ private nextId: number;
 
   constructor() {
     let todos = this.getTodos();
-    console.log("service constructor coming to service or not");
+  
 
     if (todos.length == 0) {
       this.nextId = 0;
