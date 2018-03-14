@@ -9,6 +9,8 @@ import { Dashboard } from '../dashboard';
 })
 export class DashboardComponent implements OnInit {
 
+
+    update= false;
 	  public taskname: string;
   public description: string;
   public date: string;
@@ -28,6 +30,16 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
   }
 
+
+
+
+private editTodo(): void
+{
+  this.update = true;
+}
+
+
+/*adddddddddddddddddd*/
   private addTodo(): void {
 		console.log("b");
     this.dashboardService.addTodo(this.taskname , this.description , this.date);
@@ -40,9 +52,27 @@ export class DashboardComponent implements OnInit {
 }
 
 
-
-  private removeTodo(): void {
-    this.dashboardService.removeTodo(this.todo.id);
+/*remnove*/
+  private removeTodo(id: number): void {
+    alert(id);
+    this.dashboardService.removeTodo(id);
   }
 
+
+  /*updade*/
+
+  private updateTodo(id: number): void {
+    alert(id);
+    this.dashboardService.updateTodo(id);
+  }
+
+
+ key: string = 'taskname'; //set default
+  reverse: boolean = false;
+  sort(key){
+    this.key = key;
+    this.reverse = !this.reverse;
+
+
+}
 }

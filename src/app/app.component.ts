@@ -14,8 +14,11 @@ import { Dashboard } from './dashboard';
 })
 export class AppComponent {
 
-constructor(private registerService: RegisterService ,dashboardService: DashboardService) {
-  }
-
-
+	constructor(private registerService: RegisterService ,dashboardService: DashboardService) {
 	}
+
+
+	
+}
+
+

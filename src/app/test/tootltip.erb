@@ -1,0 +1,275 @@
+<div class="page-wrapper-row">
+  <div class="page-wrapper-top">
+    <!-- BEGIN HEADER -->
+    <div class="page-header">
+      <!-- BEGIN HEADER TOP -->
+      <div class="page-header-top">
+
+        <div class="container">
+
+          <!-- BEGIN LOGO -->
+          <div class="page-logo">
+            <%= link_to image_tag('logo-app-header.png', class: 'logo-default'), root_path, target: "_self" %>
+          </div>
+          <!-- END LOGO -->
+
+          <!-- BEGIN TOP NAVIGATION MENU -->
+          <div class="top-menu">
+            <% if current_user.present? && current_user.completed_steps.count >= 6 %>
+            <ul class="nav navbar-nav">
+              <li class="dropdown">
+                <div class="custom">
+                  <a href="javascript:;" data-toggle="dropdown" class="btn btn-default btn-fixed-width dropdown-toggle"
+                  aria-expanded="false">
+                  <%= current_page %>
+                  <i class="fa fa-angle-down"></i>
+                </a>
+                <ul class="dropdown-menu">
+                  <% App::NAVIGATION_OPTIONS.each do |option| %>
+                  <% unless current_page?(option[:path]) %>
+                  <% unless (option[:name] == 'Admin' && !current_user.is_admin) %>
+                  <li>
+                    <%= link_to option[:name], option[:path] %>
+                  </li>
+                  <% end %>
+                  <% end %>
+                  <% end %>
+                </ul>
+              </div>
+            </li>
+          </ul>
+          <% end %>
+
+          <ul class="nav navbar-nav pull-right">
+            <li ng-if-start="page.name == 'cockpit'">
+              <span class="stat-text">
+                {{cockpitStats.activeInquiriesCount}} | {{cockpitStats.pendingInquiriesCount}}
+              </span>
+            </li>
+
+            <li style="padding-top: 8px;" ng-if-end>
+              <a class="btn btn-circle btn-icon-only btn-dark-gray btn-top"
+              ng-click="startTimer()" ng-if="timeCounter.is_paused">
+              <i class="fa fa-play"></i>
+            </a>
+
+            <a class="btn btn-circle btn-icon-only btn-dark-gray btn-top"
+            ng-click="pauseTimer()" ng-if="!timeCounter.is_paused">
+            <i class="fa fa-pause"></i>
+          </a>
+        </li>
+        <li class="w3-xlarge" style="padding: 5px 10px; color: #827b7b; font-size: 30px !important;">
+          <i class="fa fa-search" data-toggle="modal" data-target="#myModal" ></i>
+        </li>
+        <% if current_user.present? %>
+        <li class="dropdown dropdown-user" style="padding: 8px 10px">
+          <a class="btn btn-circle btn-icon-only btn-dark-gray btn-top" id="dropdown-user"
+          href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"
+          style="font-size: 16px ! important; padding-top: 5px ! important;">
+          <span><%= current_user.initial %></span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-default">
+          <li>
+            <a href="/my_profile"> Profile </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+          </li>
+        </ul>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+  <!-- END TOP NAVIGATION MENU -->
+</div>
+</div>
+<!-- END HEADER TOP -->
+</div>
+<!-- END HEADER -->
+</div>
+</div>
+<!--SEARCH MODAL-->
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+  <button type="button" class="close modal_close" data-dismiss="modal">&times;</button><br>
+  <div style="margin-bottom: 15px;">
+   <input type="checkbox" name="recent" class="checksearch" ng-click="include_recent()" checked><span > Only include recent campaigns in search results</span><br>
+ </div>
+ <div>
+  <span class="clearable" style="width: 100%;">
+    <input type="text" placeholder="Search Accounts and Contacts" name="search"  ng-change="searching()" ng-model="search.text" class="recent_search clearable">  <i class="clearable__clear">&times;</i></span>
+    <div ng-hide="myserachData== ''|| null" class="table-responsive col-xs-12 col-md-12 result">          
+      <table class="table">
+        <tbody>
+          <tr ng-repeat="data in myserachData">
+            <td>
+       <!--        <span  data-toggle="tooltip" title="{{data[4]}}" ng-click="getKeyContacts($index,data[2],data[8]);">
+              <span ng-bind-html="data[1] | highlight:search.text" >
+              </span>({{data[3]}} : {{data[4]}})
+              </span>
+               
+               <span id="key_{{$index}}" style="display:none;">
+
+               <ul class="campaigns_recent" ng-repeat="data1 in data.key_contact" >
+                 <li>{{data1.first_name}} {{data1.last_name}}, {{data1.title}}</li>
+              </ul>
+            </span> -->
+
+
+
+            <div>
+              <div ng-if="{{data[4]}} === 'In Process'">
+                <span  data-toggle="tooltip" title="{{data[5]}}" ng-click="getKeyContacts($index,data[2],data[8]);">
+                <span ng-bind-html="data[1] | highlight:search.text" >
+                </span>({{data[3]}} : {{data[4]}})
+              </span>
+
+              <span id="key_{{$index}}" style="display:none;">
+
+               <ul class="campaigns_recent" ng-repeat="data1 in data.key_contact" >
+                 <li>{{data1.first_name}} {{data1.last_name}}, {{data1.title}}</li>
+               </ul>
+             </span>
+
+              </div>
+              <div ng-if="{{data[4]}} === 'Not started'">
+                <span  data-toggle="tooltip" title="{{data[6]}}" ng-click="getKeyContacts($index,data[2],data[8]);">
+              <span ng-bind-html="data[1] | highlight:search.text" >
+              </span>({{data[3]}} : {{data[4]}})
+            </span>
+
+            <span id="key_{{$index}}" style="display:none;">
+
+             <ul class="campaigns_recent" ng-repeat="data1 in data.key_contact" >
+               <li>{{data1.first_name}} {{data1.last_name}}, {{data1.title}}</li>
+             </ul>
+           </span>
+              </div>
+
+              <div ng-if="{{data[4]}} === 'Completed'">
+              span  data-toggle="tooltip" title="{{data[7]}}" ng-click="getKeyContacts($index,data[2],data[8]);">
+            <span ng-bind-html="data[1] | highlight:search.text" >
+            </span>({{data[3]}} : {{data[4]}})
+          </span>
+
+          <span id="key_{{$index}}" style="display:none;">
+
+           <ul class="campaigns_recent" ng-repeat="data1 in data.key_contact" >
+             <li>{{data1.first_name}} {{data1.last_name}}, {{data1.title}}</li>
+           </ul>
+         </span>
+              </div>
+
+              <div ng-if="{{data[4]}} === 'Abandoned'">
+               <span  data-toggle="tooltip" title="{{data[7]}}" ng-click="getKeyContacts($index,data[2],data[8]);">
+          <span ng-bind-html="data[1] | highlight:search.text" >
+          </span>({{data[3]}} : {{data[4]}})
+        </span>
+
+        <span id="key_{{$index}}" style="display:none;">
+
+         <ul class="campaigns_recent" ng-repeat="data1 in data.key_contact" >
+           <li>{{data1.first_name}} {{data1.last_name}}, {{data1.title}}</li>
+         </ul>
+       </span>
+              </div>
+
+
+              </div>
+
+
+
+          <!--   <ng-template [ngIf]=" === 'In Process'">
+              {{data[4]}}
+              <span  data-toggle="tooltip" title="{{data[5]}}" ng-click="getKeyContacts($index,data[2],data[8]);">
+                <span ng-bind-html="data[1] | highlight:search.text" >
+                </span>({{data[3]}} : {{data[4]}})
+              </span>
+
+              <span id="key_{{$index}}" style="display:none;">
+
+               <ul class="campaigns_recent" ng-repeat="data1 in data.key_contact" >
+                 <li>{{data1.first_name}} {{data1.last_name}}, {{data1.title}}</li>
+               </ul>
+             </span>
+           </ng-template>
+
+           <ng-template [ngIf]="{{data[4]}} == 'Not started'">
+            {{data[4]}}
+            <span  data-toggle="tooltip" title="{{data[6]}}" ng-click="getKeyContacts($index,data[2],data[8]);">
+              <span ng-bind-html="data[1] | highlight:search.text" >
+              </span>({{data[3]}} : {{data[4]}})
+            </span>
+
+            <span id="key_{{$index}}" style="display:none;">
+
+             <ul class="campaigns_recent" ng-repeat="data1 in data.key_contact" >
+               <li>{{data1.first_name}} {{data1.last_name}}, {{data1.title}}</li>
+             </ul>
+           </span>
+         </ng-template>
+         <ng-template [ngIf]="{{data[4]}} === 'Completed'">
+          {{data[4]}}
+          <span  data-toggle="tooltip" title="{{data[7]}}" ng-click="getKeyContacts($index,data[2],data[8]);">
+            <span ng-bind-html="data[1] | highlight:search.text" >
+            </span>({{data[3]}} : {{data[4]}})
+          </span>
+
+          <span id="key_{{$index}}" style="display:none;">
+
+           <ul class="campaigns_recent" ng-repeat="data1 in data.key_contact" >
+             <li>{{data1.first_name}} {{data1.last_name}}, {{data1.title}}</li>
+           </ul>
+         </span>
+
+       </ng-template>
+
+       <ng-template  [ngIf]="{{data[4]}} === 'Abandoned'" >   
+        {{data[4]}}
+        <span  data-toggle="tooltip" title="{{data[7]}}" ng-click="getKeyContacts($index,data[2],data[8]);">
+          <span ng-bind-html="data[1] | highlight:search.text" >
+          </span>({{data[3]}} : {{data[4]}})
+        </span>
+
+        <span id="key_{{$index}}" style="display:none;">
+
+         <ul class="campaigns_recent" ng-repeat="data1 in data.key_contact" >
+           <li>{{data1.first_name}} {{data1.last_name}}, {{data1.title}}</li>
+         </ul>
+       </span>
+     </ng-template>
+ -->
+
+
+
+   </td>
+ </tr>   
+</tbody>
+</table>
+</div>
+</div>
+<!--  </div> -->
+
+<!-- </div> -->
+</div>
+<!--SEARCH MODAL END-->
+<script type="text/javascript">
+  $(".clearable").each(function() {
+
+    var $inp = $(this).find("input:text"),
+    $cle = $(this).find(".clearable__clear");
+
+    $inp.on("input", function(){
+      $cle.toggle(!!this.value);
+    });
+
+    $cle.on("touchstart click", function(e) {
+      e.preventDefault();
+      $inp.val("").trigger("input");
+    });
+
+  });
+
+</script>

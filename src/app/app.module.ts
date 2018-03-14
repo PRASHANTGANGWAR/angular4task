@@ -5,6 +5,8 @@ import { HttpModule } from '@angular/http';
 /*import { RouterModule } from '@angular/router'; */
 import { RouterModule, Routes } from '@angular/router';
 import { StorageServiceModule } from 'angular-webstorage-service'; // for local storage , import the module
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { Ng2OrderModule } from 'ng2-order-pipe';
 
 import { RegisterService } from './register.service';
 import { DashboardService } from './dashboard.service';
@@ -37,7 +39,9 @@ const appRoutes: Routes = [
   FormsModule,
   HttpModule,
   RouterModule.forRoot(appRoutes),
-  StorageServiceModule
+  StorageServiceModule,
+  Ng2SearchPipeModule,
+  Ng2OrderModule
   ],
   providers: [
   RegisterService,

@@ -8,7 +8,7 @@ private nextId: number;
 
   constructor() {
     let todos = this.getTodos();
-    console.log("service constructor coming to service or not");
+  
 
     if (todos.length == 0) {
       this.nextId = 0;
@@ -40,6 +40,18 @@ private nextId: number;
     todos = todos.filter((todo)=> todo.id != id);
     this.setLocalStorageTodos(todos);
   }
+
+
+
+  public updateTodo(id: number): void {
+    let todos = this.getTodos();
+   
+/*for update*/
+
+      this.setLocalStorageTodos(todos);
+  }
+
+
 
   // private function to help save to local storage
   private setLocalStorageTodos(todos: Dashboard[]): void {
