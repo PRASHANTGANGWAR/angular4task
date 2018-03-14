@@ -21,6 +21,7 @@ private nextId: number;
 
 
   public addTodo(taskname: string ,description:string, date:string): void {
+    //debugger;
     let todo = new Dashboard(this.nextId, taskname ,description ,date);
     let todos = this.getTodos();
     todos.push(todo);
@@ -47,7 +48,13 @@ private nextId: number;
     let todos = this.getTodos();
     
         alert("tn"+taskname);
-    //todos = todos.filter((todo)=> todo.id == id);
+    todos = todos.filter((todo)=> todo.id != id);
+this.setLocalStorageTodos(todos);
+    let todo = new Dashboard(id, taskname ,description ,date);
+     todos = this.getTodos();
+    todos.push(todo);
+    this.setLocalStorageTodos(todos);
+
 
     /*todos.taskname = taskname;
     todos.description = description;
@@ -56,10 +63,10 @@ private nextId: number;
 /*for update*/
 
 
-      this.setLocalStorageTodos(todos);
+      console.log(todos);
   }
 
-
+   
 
   // private function to help save to local storage
   private setLocalStorageTodos(todos: Dashboard[]): void {
