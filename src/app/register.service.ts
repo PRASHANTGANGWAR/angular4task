@@ -10,7 +10,7 @@ export class RegisterService {
   private nextId: number;
 
   constructor(private router: Router) { 
-    alert("in reg service");
+    //alert("in reg service");
 
     let reg = this.getRegister();
     if (reg.length == 0) {
@@ -23,7 +23,7 @@ export class RegisterService {
 
 
   public addRegister(name: string , email:string , password: string): void {
-    alert("in reg service add function");
+   // alert("in reg service add function");
 
     let register = new Register(this.nextId, name ,email , password);
     let reg = this.getRegister();

@@ -43,10 +43,18 @@ private nextId: number;
 
 
 
-  public updateTodo(id: number): void {
+  public updateTodo(id: number ,taskname: string ,description:string, date:string): void {
     let todos = this.getTodos();
-   
+    
+        alert("tn"+taskname);
+    //todos = todos.filter((todo)=> todo.id == id);
+
+    /*todos.taskname = taskname;
+    todos.description = description;
+    todos.date = date;
+    */
 /*for update*/
+
 
       this.setLocalStorageTodos(todos);
   }
